@@ -1,0 +1,36 @@
+{
+  "name": "ChatApp",
+  "version": "1.0.0",
+  "description": "A MERN Chat application using MongoDB and GraphQL, ExpressJS, ReactJS and NodeJS.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon -r esm",
+    "start": "NODE_ENV=production node -r esm ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EliottElek/ChatApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EliottElek/ChatApp/issues"
+  },
+  "homepage": "https://github.com/EliottElek/ChatApp#readme",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "apollo-server-express": "2",
+    "bcryptjs": "^2.4.3",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "graphql": "^15.6.0",
+    "joi": "^17.4.2",
+    "mongoose": "^6.0.8",
+    "nodemon": "^2.0.13"
+  },
+  "devDependencies": {
+    "standard": "^16.0.3",
+    "supervisor": "^0.12.0"
+  }
+}
