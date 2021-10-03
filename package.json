@@ -1,5 +1,5 @@
 {
-  "name": "ChatApp",
+  "name": "chatapp",
   "version": "1.0.0",
   "description": "A MERN Chat application using MongoDB and GraphQL, ExpressJS, ReactJS and NodeJS.",
   "main": "index.js",

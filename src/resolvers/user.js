@@ -18,7 +18,8 @@ export default {
   Mutation: {
     signUp: (root, args, context, info) => {
       //validation
-       SignUp.validate(args);
+      const validation = SignUp.validate(args);
+      console.log(validation);
       return User.create(args);
     },
   },
