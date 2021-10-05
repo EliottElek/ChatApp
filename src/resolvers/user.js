@@ -14,18 +14,21 @@ export default {
       if (!mongoose.Types.ObjectId.isValid(arg.id)) {
         throw new UserInputError("not a valid user ID");
       }
-
       const q = User.findById(arg.id);
       await q;
       return await q.clone();
     },
   },
   Mutation: {
-    signUp: (root, args, context, info) => {
+    signUp: async (root, args, context, info) => {
       //validation
-      // const validation = SignUp.validate(args);
-      // console.log(validation);
-      return User.create(args);
+      const { error } = SignUp.validate(args);
+      if (!error) {
+        return await User.create(args);
+      } else {
+        alert(error);
+        console.log(error);
+      }
     },
   },
 };
