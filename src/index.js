@@ -11,7 +11,7 @@ const dbConnect = async () => {
   try {
     mongoose.connect(
       `
-      mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.a6lcp.mongodb.net/${DB_NAME}?retryWrites=true&w=majority
+      mongodb+srv://admin:${DB_PASSWORD}@users.mdevh.mongodb.net/${DB_NAME}?retryWrites=true&w=majority
   `,
       { useNewUrlParser: true }
     );
@@ -21,9 +21,9 @@ const dbConnect = async () => {
   }
 };
 dbConnect();
-app.get("/", (req, res)=>{
-  res.send("<a href = '/graphql'>GraphQL interface</a>")
-})
+app.get("/", (req, res) => {
+  res.send("<a href = '/graphql'>GraphQL interface</a>");
+});
 app.disable("x-powered-by");
 const server = new ApolloServer({
   typeDefs,

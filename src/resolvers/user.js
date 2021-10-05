@@ -5,21 +5,26 @@ import { SignUp } from "../schemas";
 
 export default {
   Query: {
-    users: (root, arg, context, info) => {
-      return User.find({});
+    users: async (root, arg, context, info) => {
+      const q = User.find({});
+      await q;
+      return await q.clone();
     },
-    user: (root, arg, context, info) => {
-      if (!mongoose.Types.ObjectId.isValid(args.id)) {
+    user: async (root, arg, context, info) => {
+      if (!mongoose.Types.ObjectId.isValid(arg.id)) {
         throw new UserInputError("not a valid user ID");
       }
-      return User.findById(arg.id);
+
+      const q = User.findById(arg.id);
+      await q;
+      return await q.clone();
     },
   },
   Mutation: {
     signUp: (root, args, context, info) => {
       //validation
-      const validation = SignUp.validate(args);
-      console.log(validation);
+      // const validation = SignUp.validate(args);
+      // console.log(validation);
       return User.create(args);
     },
   },
