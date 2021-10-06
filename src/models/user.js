@@ -1,10 +1,25 @@
-import mongoose from "mongoose";
-import { hash } from "bcryptjs";
+import mongoose, { Schema } from "mongoose";
+import { hash, compare } from "bcryptjs";
 
 const userSchema = new mongoose.Schema(
   {
-    email: String,
-    username: String,
+    email: {
+      type: String,
+      validate: {
+        validator: async (email) =>
+          (await User.where({ email }).countDocuments()) === 0,
+        message: ({ value }) => `Email ${value} has already been taken.`,
+      },
+    },
+    username: {
+      type: String,
+      validate: {
+        validator: async (username) =>
+          (await User.where({ username }).countDocuments()) === 0,
+        message: ({ value }) => `Username ${value} has already been taken.`,
+      },
+    },
+    chats: [{ type: Schema.Types.ObjectId, ref: "Chat" }],
     name: String,
     password: String,
   },
@@ -20,4 +35,12 @@ userSchema.pre("save", async function (next) {
   }
   next();
 });
-export default mongoose.model("User", userSchema);
+userSchema.static.doesntExist = async function (options) {
+  return (await this.where(options).countDocuments) === 0;
+};
+
+userSchema.methods.isPassword = async function (password) {
+  return await compare(password, this.password);
+};
+const User = mongoose.model("User", userSchema);
+export default User;

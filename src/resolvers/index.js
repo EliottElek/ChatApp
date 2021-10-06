@@ -1,2 +1,4 @@
 import user from "./user";
-export default [user];
+import chat from "./chat";
+
+export default [user,chat];
